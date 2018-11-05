@@ -39,11 +39,21 @@ uint8_t I2C_busy(){
 	return busy;
 }
 
-void I2C_mst_or_slv_mode(i2c_mst_or_slv_t mst_or_slv){
+void I2C_mst_or_slv_mode(uint8_t mst_or_slv){
 	if(mst_or_slv == I2C_SLV_MODE) {
 		I2C0->C1 &= ~(I2C_C1_MST_MASK);
 	}
 	else if(mst_or_slv == I2C_MST_MODE){
 		I2C0->C1 |= (I2C_C1_MST_MASK);
 	}
+}
+
+void I2C_tx_rx_mode(uint8_t tx_or_rx){
+	if(I2C_RX_MODE == tx_or_rx){
+		I2C0->C1 &= ~(I2C_C1_TX_MASK);
+	}
+	else if(I2C_TX_MODE == tx_or_rx){
+		I2C0->C1 |= I2C_C1_TX_MASK;
+	}
+
 }
