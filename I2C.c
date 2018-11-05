@@ -28,4 +28,13 @@ void I2C_init(i2c_channel_t channel, uint32_t system_clock, uint16_t baud_rate){
 	}/*switch*/
 }
 
+uint8_t I2C_busy(){
+	uint8 busy = FALSE;
+	if((I2C0->S & I2C_S_BUSY_MASK) == FALSE){
 
+	}
+	else{
+		busy = TRUE;
+	}
+	return busy;
+}
