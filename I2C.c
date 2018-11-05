@@ -18,7 +18,7 @@ void I2C_init(i2c_channel_t channel, uint32_t system_clock, uint16_t baud_rate){
 		case I2C_0:{
 			SIM->SCGC4 |= SIM_SCGC4_I2C0_MASK;
 			I2C0->C1 |= I2C_C1_IICEN_MASK;
-			I2C0->SMB &= ~I2C_SMB_FACK_MASK;
+			I2C0->F |= I2C_F_ICR_MASK;
 			break;
 		}
 		case I2C_1:
@@ -37,4 +37,13 @@ uint8_t I2C_busy(){
 		busy = TRUE;
 	}
 	return busy;
+}
+
+void I2C_mst_or_slv_mode(i2c_mst_or_slv_t mst_or_slv){
+	if(mst_or_slv == I2C_SLV_MODE) {
+		I2C0->C1 &= ~(I2C_C1_MST_MASK);
+	}
+	else if(mst_or_slv == I2C_MST_MODE){
+		I2C0->C1 |= (I2C_C1_MST_MASK);
+	}
 }
