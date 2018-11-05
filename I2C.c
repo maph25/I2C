@@ -7,6 +7,7 @@
 
 #include "GPIO.h"
 #include "Bits.h"
+#include "Delay.h"
 #include "I2C.h"
 
 void I2C_init(i2c_channel_t channel, uint32_t system_clock, uint16_t baud_rate){
@@ -65,4 +66,9 @@ void I2C_NACK(void){
 void I2C_repeted_start(void){
 	I2C0->C1 |= I2C_C1_RSTA_MASK;
 	delay(5000);
+}
+
+void I2C_write_byte(uint8_t data){
+	delay(5000);
+	I2C0->D = data;
 }
