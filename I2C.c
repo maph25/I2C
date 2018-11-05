@@ -61,3 +61,8 @@ void I2C_tx_rx_mode(uint8_t tx_or_rx){
 void I2C_NACK(void){
 	I2C0->C1 |= I2C_C1_TXAK_MASK;
 }
+
+void I2C_repeted_start(void){
+	I2C0->C1 |= I2C_C1_RSTA_MASK;
+	delay(5000);
+}
