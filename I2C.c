@@ -72,3 +72,8 @@ void I2C_write_byte(uint8_t data){
 	delay(5000);
 	I2C0->D = data;
 }
+
+uint8_t  I2C_read_byte(void){
+	uint8 reading = I2C0->D;
+	return  reading;
+}
