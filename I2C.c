@@ -96,3 +96,19 @@ void I2C_wait(void){
 	counter = 0;
 	I2C0->S |= I2C_S_IICIF_MASK;
 }
+
+uint8_t I2C_get_ack(void){
+    delay(5000);
+    counter = 0;
+    do{
+    	counter ++;
+    	if(counter >= MAX_COUNTER){
+			flag = TRUE;
+			counter = 0;
+    	}
+    	return TRUE;
+	}while(I2C_S_RXAK_MASK & I2C0->S);
+    return FALSE;
+}
+
+
