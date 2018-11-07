@@ -124,7 +124,7 @@ uint8_t GPIO_clock_gating(gpio_port_name_t portName);
  	 gpio_pin_control_register_t PinControlRegister = GPIO_MUX1|GPIO_PS|GPIO_PE;
  	 \return 1 if the portName is valid else return 0
  */
-uint8_t GPIO_pin_control_register(gpio_port_name_t portName, uint8_t pin, gpio_pin_control_register_t* pinControlRegister);
+uint8_t GPIO_pin_control_register(gpio_port_name_t portName, uint8_t pin, const gpio_pin_control_register_t* pinControlRegister);
 /********************************************************************************************/
 /********************************************************************************************/
 /********************************************************************************************/

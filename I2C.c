@@ -10,15 +10,23 @@
 #include "Delay.h"
 #include "I2C.h"
 
+#define MAX_COUNTER (0xFF)
+static uint8_t counter;
+uint8_t flag = FALSE;
+uint32 bus_clock;
+gpio_pin_control_register_t ctrlReg = GPIO_MUX2;
+
 void I2C_init(i2c_channel_t channel, uint32_t system_clock, uint16_t baud_rate){
 	GPIO_clock_gating (GPIO_B);
-	GPIO_pin_control_register(GPIO_B, BIT2, GPIO_MUX2);
-	GPIO_pin_control_register(GPIO_B, BIT3, GPIO_MUX2);
+	GPIO_pin_control_register(GPIO_B, BIT2, &ctrlReg);
+	GPIO_pin_control_register(GPIO_B, BIT3, &ctrlReg);
+	bus_clock = system_clock / 2;
 
 		switch (channel){
 		case I2C_0:{
 			SIM->SCGC4 |= SIM_SCGC4_I2C0_MASK;
 			I2C0->C1 |= I2C_C1_IICEN_MASK;
+			I2C0->F |= I2C_F_MULT(2);
 			I2C0->F |= I2C_F_ICR_MASK;
 			break;
 		}
@@ -76,4 +84,15 @@ void I2C_write_byte(uint8_t data){
 uint8_t  I2C_read_byte(void){
 	uint8 reading = I2C0->D;
 	return  reading;
+}
+
+void I2C_wait(void){
+	counter = 0;
+	do{
+		 counter++;
+		 if(counter >= MAX_COUNTER)
+			 flag = TRUE;
+	}while(!(I2C0->S & I2C_S_TCF_MASK));
+	counter = 0;
+	I2C0->S |= I2C_S_IICIF_MASK;
 }
