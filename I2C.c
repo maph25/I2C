@@ -117,5 +117,7 @@ void I2C_start(void){
 }
 
 void I2C_stop(void){
-
+	I2C_mst_or_slv_mode(I2C_SLV_MODE);
+	I2C_tx_rx_mode(I2C_RX_MODE);
+	delay(5000);
 }
