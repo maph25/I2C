@@ -111,4 +111,11 @@ uint8_t I2C_get_ack(void){
     return FALSE;
 }
 
+void I2C_start(void){
+	I2C_mst_or_slv_mode(I2C_MST_MODE);
+	I2C_tx_rx_mode(I2C_TX_MODE);
+}
 
+void I2C_stop(void){
+
+}
