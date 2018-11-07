@@ -21,7 +21,7 @@
 /*Predetermine set values*/
 #define RTC_SECONDS_MASK 0xD9
 #define RTC_MINUTES_MASK 0x19
-
+#define RTC_HOURS_MASK	 0x17
 
 /*Set Time and Date*/
 void set_seconds();
