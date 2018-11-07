@@ -10,13 +10,18 @@
 
 /*Addresses*/
 #define RTC_ADDRESS 0xDE
-#define RTC_SECONDS
-#define RTC_MINUTES
-#define RTC_HOURS
-#define RTC_WEEKDAY
-#define RTC_DAY
-#define RTC_MONTH
-#define RTC_YEAR
+#define RTC_SECONDS 0x00
+#define RTC_MINUTES 0x01
+#define RTC_HOURS	0x02
+#define RTC_WEEKDAY 0x03
+#define RTC_DAY 	0x04
+#define RTC_MONTH 	0x05
+#define RTC_YEAR 	0x06
+
+/*Predetermine set values*/
+#define RTC_SECONDS_MASK 0xD9
+#define RTC_MINUTES_MASK 0x19
+
 
 /*Set Time and Date*/
 void set_seconds();
