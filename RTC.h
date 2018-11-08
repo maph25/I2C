@@ -8,24 +8,27 @@
 #ifndef RTC_H_
 #define RTC_H_
 
+#include "Bits.h"
+
 /*Addresses*/
-#define RTC_ADDRESS 0xDE
-#define RTC_SECONDS 0x00
-#define RTC_MINUTES 0x01
-#define RTC_HOURS	0x02
-#define RTC_WEEKDAY 0x03
-#define RTC_DAY 	0x04
-#define RTC_MONTH 	0x05
-#define RTC_YEAR 	0x06
+#define RTC_ADDRESS 		0xDE
+#define RTC_SLAVE_ADDRESS	0xDF
+#define RTC_SECONDS 		0x00
+#define RTC_MINUTES 		0x01
+#define RTC_HOURS			0x02
+#define RTC_WEEKDAY 		0x03
+#define RTC_DAY 			0x04
+#define RTC_MONTH 			0x05
+#define RTC_YEAR 			0x06
 
 /*Predetermine set values*/
-#define RTC_SECONDS_MASK 0xD9
-#define RTC_MINUTES_MASK 0x19
-#define RTC_HOURS_MASK	 0x17
-#define RTC_WEEKDAY_MASK 0x24
-#define RTC_DAY_MASK 	 0x07
-#define RTC_MONTH_MASK 	 0x11
-#define RTC_YEAR_MASK	 0x18
+#define RTC_SECONDS_MASK 	0xD9
+#define RTC_MINUTES_MASK 	0x19
+#define RTC_HOURS_MASK		0x17
+#define RTC_WEEKDAY_MASK 	0x24
+#define RTC_DAY_MASK 	 	0x07
+#define RTC_MONTH_MASK 	 	0x11
+#define RTC_YEAR_MASK	 	0x18
 
 /*Set Time and Date*/
 void set_seconds();
@@ -35,5 +38,14 @@ void set_weekday();
 void set_day();
 void set_month();
 void set_year();
+
+/*Get Time and Date*/
+uint8 get_seconds();
+uint8 get_minutes();
+uint8 get_hours();
+uint8 get_weekday();
+uint8 get_day();
+uint8 get_month();
+uint8 get_year();
 
 #endif /* RTC_H_ */
