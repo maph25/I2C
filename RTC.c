@@ -125,5 +125,20 @@ void set_month(){
 }
 
 void set_year(){
-
+	/*Start*/
+	I2C_start();
+	/*Control byte*/
+	I2C_write_byte(RTC_ADDRESS);
+	I2C_wait();
+	I2C_get_ack();
+	/*Address byte*/
+	I2C_write_byte(RTC_YEAR);
+	I2C_wait();
+	I2C_get_ack();
+	/*Data*/
+	I2C_write_byte(RTC_YEAR_MASK); /*2018*/
+	I2C_wait();
+	I2C_get_ack();
+	/*Stop*/
+	I2C_stop();
 }
