@@ -86,7 +86,22 @@ void set_weekday(){
 }
 
 void set_day(){
-
+	/*Start*/
+		I2C_start();
+		/*Control byte*/
+		I2C_write_byte(RTC_ADDRESS);
+		I2C_wait();
+		I2C_get_ack();
+		/*Address byte*/
+		I2C_write_byte(RTC_DAY);
+		I2C_wait();
+		I2C_get_ack();
+		/*Data*/
+		I2C_write_byte(RTC_DAY_MASK); /*07*/
+		I2C_wait();
+		I2C_get_ack();
+		/*Stop*/
+		I2C_stop();
 }
 
 void set_month(){

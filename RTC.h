@@ -23,6 +23,7 @@
 #define RTC_MINUTES_MASK 0x19
 #define RTC_HOURS_MASK	 0x17
 #define RTC_WEEKDAY_MASK 0x24
+#define RTC_DAY_MASK 	 0x07
 
 /*Set Time and Date*/
 void set_seconds();
