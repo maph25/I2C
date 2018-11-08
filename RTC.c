@@ -295,3 +295,32 @@ uint8 get_day(){
 	return (data);
 }
 
+uint8 get_month(){
+	/*Start*/
+	I2C_start();
+	/*Control byte*/
+	I2C_write_byte(RTC_ADDRESS);
+	I2C_wait();
+	I2C_get_ack();
+	/*Address byte*/
+	I2C_write_byte(RTC_MONTH);
+	I2C_wait();
+	I2C_get_ack();
+	/*Restart*/
+	I2C_repeted_start();
+	/*Control byte*/
+	I2C_write_byte(RTC_SLAVE_ADDRESS);
+	I2C_wait();
+	I2C_get_ack();
+	/*Change to receiver mode*/
+	I2C_tx_rx_mode(I2C_RX_MODE);
+	I2C_nack();
+	/*Dummy read*/
+	data = I2C_read_byte();
+	I2C_wait();
+	/*Stop*/
+	I2C_stop();
+	data = I2C_read_byte();
+	/*Data return*/
+	return (data);
+}
