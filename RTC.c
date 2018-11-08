@@ -39,7 +39,7 @@ void set_minutes(){
 	I2C_wait();
 	I2C_get_ack();
 	/*Data*/
-	I2C_write_byte(RTC_MINUTES_MASK); /*Oscillator enable, 59s*/
+	I2C_write_byte(RTC_MINUTES_MASK); /*19m*/
 	I2C_wait();
 	I2C_get_ack();
 	/*Stop*/
@@ -58,7 +58,7 @@ void set_hours(){
 	I2C_wait();
 	I2C_get_ack();
 	/*Data*/
-	I2C_write_byte(RTC_HOURS_MASK); /*Oscillator enable, 59s*/
+	I2C_write_byte(RTC_HOURS_MASK); /*17h*/
 	I2C_wait();
 	I2C_get_ack();
 	/*Stop*/
@@ -66,6 +66,22 @@ void set_hours(){
 }
 
 void set_weekday(){
+	/*Start*/
+	I2C_start();
+	/*Control byte*/
+	I2C_write_byte(RTC_ADDRESS);
+	I2C_wait();
+	I2C_get_ack();
+	/*Address byte*/
+	I2C_write_byte(RTC_WEEKDAY);
+	I2C_wait();
+	I2C_get_ack();
+	/*Data*/
+	I2C_write_byte(RTC_WEEKDAY_MASK); /*Wednesday*/
+	I2C_wait();
+	I2C_get_ack();
+	/*Stop*/
+	I2C_stop();
 
 }
 
