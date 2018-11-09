@@ -20,24 +20,21 @@
 #define RTC_DAY 			0x04
 #define RTC_MONTH 			0x05
 #define RTC_YEAR 			0x06
+/*Init mask*/
+#define RTC_INIT 			0x80
 
-/*Predetermine set values*/
-#define RTC_SECONDS_MASK 	0xD9
-#define RTC_MINUTES_MASK 	0x19
-#define RTC_HOURS_MASK		0x17
-#define RTC_WEEKDAY_MASK 	0x24
-#define RTC_DAY_MASK 	 	0x07
-#define RTC_MONTH_MASK 	 	0x11
-#define RTC_YEAR_MASK	 	0x18
+/*Enable oscillator*/
+void RTC_init();
+
 
 /*Set Time and Date*/
-void set_seconds();
-void set_minutes();
-void set_hours();
-void set_weekday();
-void set_day();
-void set_month();
-void set_year();
+void set_seconds(uint8 second);
+void set_minutes(uint8 minute);
+void set_hours(uint8 hour);
+void set_weekday(uint8 weekday);
+void set_day(uint8 day);
+void set_month(uint8 month);
+void set_year(uint8 year);
 
 /*Get Time and Date*/
 uint8 get_seconds();

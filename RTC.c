@@ -10,9 +10,10 @@
 
 static uint8_t data;
 
-void set_second(){
+void RTC_init(){
 	/*Start*/
 	I2C_start();
+	I2C_tx_rx_mode(I2C_TX_MODE);
 	/*Control byte*/
 	I2C_write_byte(RTC_ADDRESS);
 	I2C_wait();
@@ -22,16 +23,38 @@ void set_second(){
 	I2C_wait();
 	I2C_get_ack();
 	/*Data*/
-	I2C_write_byte(RTC_SECONDS_MASK); /*Oscillator enable, 59s*/
+	I2C_write_byte(RTC_INIT);
+	I2C_wait();
+	I2C_get_ack();
+	/*Stop*/
+	I2C_stop();
+
+}
+
+void set_seconds(uint8 second){
+	/*Start*/
+	I2C_start();
+	I2C_tx_rx_mode(I2C_TX_MODE);
+	/*Control byte*/
+	I2C_write_byte(RTC_ADDRESS);
+	I2C_wait();
+	I2C_get_ack();
+	/*Address byte*/
+	I2C_write_byte(RTC_SECONDS);
+	I2C_wait();
+	I2C_get_ack();
+	/*Data*/
+	I2C_write_byte(second); /*Oscillator enable, 59s*/
 	I2C_wait();
 	I2C_get_ack();
 	/*Stop*/
 	I2C_stop();
 }
 
-void set_minutes(){
+void set_minutes(uint8 minute){
 	/*Start*/
 	I2C_start();
+	I2C_tx_rx_mode(I2C_TX_MODE);
 	/*Control byte*/
 	I2C_write_byte(RTC_ADDRESS);
 	I2C_wait();
@@ -41,16 +64,17 @@ void set_minutes(){
 	I2C_wait();
 	I2C_get_ack();
 	/*Data*/
-	I2C_write_byte(RTC_MINUTES_MASK); /*19m*/
+	I2C_write_byte(minute);
 	I2C_wait();
 	I2C_get_ack();
 	/*Stop*/
 	I2C_stop();
 }
 
-void set_hours(){
+void set_hours(uint8 hour){
 	/*Start*/
 	I2C_start();
+	I2C_tx_rx_mode(I2C_TX_MODE);
 	/*Control byte*/
 	I2C_write_byte(RTC_ADDRESS);
 	I2C_wait();
@@ -60,16 +84,17 @@ void set_hours(){
 	I2C_wait();
 	I2C_get_ack();
 	/*Data*/
-	I2C_write_byte(RTC_HOURS_MASK); /*17h*/
+	I2C_write_byte(hour);
 	I2C_wait();
 	I2C_get_ack();
 	/*Stop*/
 	I2C_stop();
 }
 
-void set_weekday(){
+void set_weekday(uint8 weekday){
 	/*Start*/
 	I2C_start();
+	I2C_tx_rx_mode(I2C_TX_MODE);
 	/*Control byte*/
 	I2C_write_byte(RTC_ADDRESS);
 	I2C_wait();
@@ -79,7 +104,7 @@ void set_weekday(){
 	I2C_wait();
 	I2C_get_ack();
 	/*Data*/
-	I2C_write_byte(RTC_WEEKDAY_MASK); /*Wednesday*/
+	I2C_write_byte(weekday);
 	I2C_wait();
 	I2C_get_ack();
 	/*Stop*/
@@ -87,9 +112,10 @@ void set_weekday(){
 
 }
 
-void set_day(){
+void set_day(uint8 day){
 	/*Start*/
 	I2C_start();
+	I2C_tx_rx_mode(I2C_TX_MODE);
 	/*Control byte*/
 	I2C_write_byte(RTC_ADDRESS);
 	I2C_wait();
@@ -99,16 +125,17 @@ void set_day(){
 	I2C_wait();
 	I2C_get_ack();
 	/*Data*/
-	I2C_write_byte(RTC_DAY_MASK); /*07*/
+	I2C_write_byte(day);
 	I2C_wait();
 	I2C_get_ack();
 	/*Stop*/
 	I2C_stop();
 }
 
-void set_month(){
+void set_month(uint8 month){
 	/*Start*/
 	I2C_start();
+	I2C_tx_rx_mode(I2C_TX_MODE);
 	/*Control byte*/
 	I2C_write_byte(RTC_ADDRESS);
 	I2C_wait();
@@ -118,7 +145,7 @@ void set_month(){
 	I2C_wait();
 	I2C_get_ack();
 	/*Data*/
-	I2C_write_byte(RTC_MONTH_MASK); /*11, November*/
+	I2C_write_byte(month);
 	I2C_wait();
 	I2C_get_ack();
 	/*Stop*/
@@ -126,9 +153,10 @@ void set_month(){
 
 }
 
-void set_year(){
+void set_year(uint8 year){
 	/*Start*/
 	I2C_start();
+	I2C_tx_rx_mode(I2C_TX_MODE);
 	/*Control byte*/
 	I2C_write_byte(RTC_ADDRESS);
 	I2C_wait();
@@ -138,7 +166,7 @@ void set_year(){
 	I2C_wait();
 	I2C_get_ack();
 	/*Data*/
-	I2C_write_byte(RTC_YEAR_MASK); /*2018*/
+	I2C_write_byte(year);
 	I2C_wait();
 	I2C_get_ack();
 	/*Stop*/

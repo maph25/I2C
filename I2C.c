@@ -16,9 +16,9 @@ gpio_pin_control_register_t ctrlReg = GPIO_MUX2;
 
 void I2C_init(i2c_channel_t channel, uint32_t system_clock, uint16_t baud_rate){
 	GPIO_clock_gating (GPIO_B);
-	GPIO_pin_control_register(GPIO_B, BIT2, &ctrlReg);
+	GPIO_pin_control_register(GPIO_B, BIT2, &ctrlReg);/*SCL*/
 	GPIO_data_direction_pin(GPIO_B, GPIO_OUTPUT, BIT2);
-	GPIO_pin_control_register(GPIO_B, BIT3, &ctrlReg);
+	GPIO_pin_control_register(GPIO_B, BIT3, &ctrlReg);/*SDA*/
 	GPIO_data_direction_pin(GPIO_B, GPIO_OUTPUT, BIT2);
 	SCL = (system_clock)/(baud_rate * MULTIPLIER);
 
@@ -75,7 +75,7 @@ void I2C_tx_rx_mode(uint8_t tx_or_rx){
 
 }
 
-void I2C_NACK(void){
+void I2C_nack(void){
 	I2C0->C1 |= I2C_C1_TXAK_MASK;
 }
 
