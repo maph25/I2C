@@ -10,24 +10,37 @@
 #include "Delay.h"
 #include "I2C.h"
 
-uint32_t baudRate;
+#define MULTIPLIER (4u)
+uint32_t SCL;
 gpio_pin_control_register_t ctrlReg = GPIO_MUX2;
 
 void I2C_init(i2c_channel_t channel, uint32_t system_clock, uint16_t baud_rate){
 	GPIO_clock_gating (GPIO_B);
 	GPIO_pin_control_register(GPIO_B, BIT2, &ctrlReg);
+	GPIO_data_direction_pin(GPIO_B, GPIO_OUTPUT, BIT2);
 	GPIO_pin_control_register(GPIO_B, BIT3, &ctrlReg);
-	baudRate = (system_clock)/(baud_rate*4);
+	GPIO_data_direction_pin(GPIO_B, GPIO_OUTPUT, BIT2);
+	SCL = (system_clock)/(baud_rate * MULTIPLIER);
 
 		switch (channel){
 		case I2C_0:{
 			SIM->SCGC4 |= SIM_SCGC4_I2C0_MASK;
+			I2C0->F = I2C_F_ICR(SCL);
+			I2C0->F = I2C_F_MULT(2);
 			I2C0->C1 |= I2C_C1_IICEN_MASK;
 			break;
 		}
 		case I2C_1:
+			SIM->SCGC4 |= SIM_SCGC4_I2C1_MASK;
+			I2C1->F = I2C_F_ICR(SCL);
+			I2C1->F = I2C_F_MULT(2);
+			I2C1->C1 |= I2C_C1_IICEN_MASK;
 			break;
 		case I2C_2:
+			SIM->SCGC1 |= SIM_SCGC1_I2C2_MASK;
+			I2C2->F = I2C_F_ICR(SCL);
+			I2C2->F = I2C_F_MULT(2);
+			I2C2->C1 |= I2C_C1_IICEN_MASK;
 			break;
 	}/*switch*/
 }

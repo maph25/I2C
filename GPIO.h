@@ -135,7 +135,7 @@ uint8_t GPIO_pin_control_register(gpio_port_name_t portName, uint8_t pin, const 
  	 \param[in] direction Input value to specify the port as input or output.
  	 \return void
  */
-void GPIO_data_directionPORT(gpio_port_name_t portName, uint32_t direction);
+void GPIO_data_direction_port(gpio_port_name_t portName, uint32_t direction);
 /********************************************************************************************/
 /********************************************************************************************/
 /********************************************************************************************/
