@@ -38,5 +38,6 @@ void TERATERM_get_calendar();
 
 /*Transform RTC information to chars for UART*/
 void TERATERM_get_decode_clock(TERATERM_clock_t clock_t);
+void TERATERM_get_decode_calendar(TERATERM_calendar_t calendar_t);
 
 #endif /* TERATERM_H_ */
