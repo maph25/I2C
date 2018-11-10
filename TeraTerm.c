@@ -7,11 +7,20 @@
 
 #include "TeraTerm.h"
 #include "Bits.h"
-#include"RTC.h"
+#include "RTC.h"
+
+TERATERM_clock_t Clock;
+TERATERM_calendar_t Calendar;
 
 void TERATERM_get_clock(){
-	TERATERM_clock_t.hours = RTC_get_hours();
-	TERATERM_clock_t.minutes = RTC_get_minutes();
-	TERATERM_clock_t.seconds = RTC_get_seconds();
+	Clock.hours = RTC_get_hours();
+	Clock.minutes = RTC_get_minutes();
+	Clock.seconds = RTC_get_seconds();
+}
 
+void TERATERM_get_calendar(){
+	Calendar.weekday = RTC_get_weekday();
+	Calendar.day = RTC_get_day();
+	Calendar.month = RTC_get_month();
+	Calendar.year = RTC_get_year();
 }
