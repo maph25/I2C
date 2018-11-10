@@ -10,6 +10,13 @@
 
 #include "Bits.h"
 
+/*Shifter for decimal*/
+#define SHIFT_DECIMAL (4u)
+/*Decimal mask*/
+#define DECIMAL_MASK 0xF0
+/*Unit mask*/
+#define UNIT_MASK	0x0F
+
 /*Structure to save current time*/
 typedef struct{
 	uint8 hours;
@@ -28,5 +35,8 @@ typedef struct{
 /*Save current status*/
 void TERATERM_get_clock();
 void TERATERM_get_calendar();
+
+/*Transform RTC information to chars for UART*/
+void TERATERM_get_decode_clock(TERATERM_clock_t clock_t);
 
 #endif /* TERATERM_H_ */
