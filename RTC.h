@@ -28,21 +28,21 @@ void RTC_init();
 
 
 /*Set Time and Date*/
-void set_seconds(uint8 second);
-void set_minutes(uint8 minute);
-void set_hours(uint8 hour);
-void set_weekday(uint8 weekday);
-void set_day(uint8 day);
-void set_month(uint8 month);
-void set_year(uint8 year);
+void RTC_set_seconds(uint8 second);
+void RTC_set_minutes(uint8 minute);
+void RTC_set_hours(uint8 hour);
+void RTC_set_weekday(uint8 weekday);
+void RTC_set_day(uint8 day);
+void RTC_set_month(uint8 month);
+void RTC_set_year(uint8 year);
 
 /*Get Time and Date*/
-uint8 get_seconds();
-uint8 get_minutes();
-uint8 get_hours();
-uint8 get_weekday();
-uint8 get_day();
-uint8 get_month();
-uint8 get_year();
+uint8 RTC_get_seconds();
+uint8 RTC_get_minutes();
+uint8 RTC_get_hours();
+uint8 RTC_get_weekday();
+uint8 RTC_get_day();
+uint8 RTC_get_month();
+uint8 RTC_get_year();
 
 #endif /* RTC_H_ */

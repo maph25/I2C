@@ -31,7 +31,7 @@ void RTC_init(){
 
 }
 
-void set_seconds(uint8 second){
+void RTC_set_seconds(uint8 second){
 	/*Start*/
 	I2C_start();
 	I2C_tx_rx_mode(I2C_TX_MODE);
@@ -51,7 +51,7 @@ void set_seconds(uint8 second){
 	I2C_stop();
 }
 
-void set_minutes(uint8 minute){
+void RTC_set_minutes(uint8 minute){
 	/*Start*/
 	I2C_start();
 	I2C_tx_rx_mode(I2C_TX_MODE);
@@ -71,7 +71,7 @@ void set_minutes(uint8 minute){
 	I2C_stop();
 }
 
-void set_hours(uint8 hour){
+void RTC_set_hours(uint8 hour){
 	/*Start*/
 	I2C_start();
 	I2C_tx_rx_mode(I2C_TX_MODE);
@@ -91,7 +91,7 @@ void set_hours(uint8 hour){
 	I2C_stop();
 }
 
-void set_weekday(uint8 weekday){
+void RTC_set_weekday(uint8 weekday){
 	/*Start*/
 	I2C_start();
 	I2C_tx_rx_mode(I2C_TX_MODE);
@@ -112,7 +112,7 @@ void set_weekday(uint8 weekday){
 
 }
 
-void set_day(uint8 day){
+void RTC_set_day(uint8 day){
 	/*Start*/
 	I2C_start();
 	I2C_tx_rx_mode(I2C_TX_MODE);
@@ -132,7 +132,7 @@ void set_day(uint8 day){
 	I2C_stop();
 }
 
-void set_month(uint8 month){
+void RTC_set_month(uint8 month){
 	/*Start*/
 	I2C_start();
 	I2C_tx_rx_mode(I2C_TX_MODE);
@@ -153,7 +153,7 @@ void set_month(uint8 month){
 
 }
 
-void set_year(uint8 year){
+void RTC_set_year(uint8 year){
 	/*Start*/
 	I2C_start();
 	I2C_tx_rx_mode(I2C_TX_MODE);
@@ -173,7 +173,7 @@ void set_year(uint8 year){
 	I2C_stop();
 }
 
-uint8 get_seconds(){
+uint8 RTC_get_seconds(){
 	/*Start*/
 	I2C_start();
 	/*Control byte*/
@@ -203,7 +203,7 @@ uint8 get_seconds(){
 	return (data);
 }
 
-uint8 get_minutes(){
+uint8 RTC_get_minutes(){
 	/*Start*/
 	I2C_start();
 	/*Control byte*/
@@ -233,7 +233,7 @@ uint8 get_minutes(){
 	return (data);
 }
 
-uint8 get_hours(){
+uint8 RTC_get_hours(){
 	/*Start*/
 	I2C_start();
 	/*Control byte*/
@@ -263,7 +263,7 @@ uint8 get_hours(){
 	return (data);
 }
 
-uint8 get_weekday(){
+uint8 RTC_get_weekday(){
 	/*Start*/
 	I2C_start();
 	/*Control byte*/
@@ -293,7 +293,7 @@ uint8 get_weekday(){
 	return (data);
 }
 
-uint8 get_day(){
+uint8 RTC_get_day(){
 	/*Start*/
 	I2C_start();
 	/*Control byte*/
@@ -323,7 +323,7 @@ uint8 get_day(){
 	return (data);
 }
 
-uint8 get_month(){
+uint8 RTC_get_month(){
 	/*Start*/
 	I2C_start();
 	/*Control byte*/
@@ -353,7 +353,7 @@ uint8 get_month(){
 	return (data);
 }
 
-uint8 get_year(){
+uint8 RTC_get_year(){
 	/*Start*/
 	I2C_start();
 	/*Control byte*/

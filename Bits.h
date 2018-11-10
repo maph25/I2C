@@ -5,11 +5,11 @@
  *      Author: Andrea Perez ie698276@iteso.mx
  */
 
-#ifndef BITS_H_
-#define BITS_H_
+#ifndef DATATYPEDEFINITIONS_H_
+#define DATATYPEDEFINITIONS_H_
 
 
-/*! This definition is as a general definitions to bits in regiter or pins in the microcontroller.*/
+/*! This definition is as a general definitions to bits in register or pins in the microcontroller.*/
 typedef enum {BIT0,  /*!< Bit 0 */
 			  BIT1,  /*!< Bit 1 */
 			  BIT2,  /*!< Bit 2 */
@@ -45,7 +45,6 @@ typedef enum {BIT0,  /*!< Bit 0 */
 			} BitsType;
 
 
-
 typedef enum{FALSE, TRUE} BooleanType;
 /*! This definition is as a general definitions to bits turn-on or turn-off any bit*/
 typedef enum {BIT_OFF, BIT_ON} BIT_ON_OFF_Type;
@@ -63,4 +62,4 @@ typedef unsigned long int uint32;
 typedef long int sint32;
 
 
-#endif /* BITS_H_ */
+#endif /* DATATYPEDEFINITIONS_H_ */
