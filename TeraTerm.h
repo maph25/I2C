@@ -18,6 +18,14 @@
 #define UNIT_MASK	0x0F
 /*Addition for printing char*/
 #define ADD 0x30
+/*Days of the week*/
+#define SUNDAY 0x01
+#define MONDAY 0x02
+#define TUESDAY 0x03
+#define WEDNESDAY 0x04
+#define THURSDAY 0x05
+#define FRIDAY 0x06
+#define SATURDAY 0x07
 
 /*Structure to save current time*/
 typedef struct{
@@ -44,6 +52,7 @@ void TERATERM_get_decode_calendar(TERATERM_calendar_t calendar_t);
 
 /*Print in screen*/
 void TERATERM_print_clock();
+void TERATERM_print_calendar();
 
 
 #endif /* TERATERM_H_ */

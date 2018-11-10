@@ -48,6 +48,7 @@ void TERATERM_get_decode_calendar(TERATERM_calendar_t calendar_t){
 }
 
 void TERATERM_print_clock(){
+	UART_putString(UART_0, "Current time is: \r");
 	/*Print hour*/
 	time[0] = time[0] + ADD;
 	UART_putChar(UART_0, time[0]);
@@ -65,4 +66,58 @@ void TERATERM_print_clock(){
 	UART_putChar(UART_0, time[4]);
 	time[5] = time[2] + ADD;
 	UART_putChar(UART_0, time[5]);
+}
+
+void TERATERM_print_calendar(){
+	UART_putString(UART_0, "Today is: \r");
+	/*Print weekday*/
+	switch(date[0]){
+		case SUNDAY:{
+			UART_putString(UART_0, "Sunday \r");
+			break;
+		}
+		case MONDAY:{
+			UART_putString(UART_0, "Monday \r");
+			break;
+		}
+		case TUESDAY:{
+			UART_putString(UART_0, "Tuesday \r");
+			break;
+		}
+		case WEDNESDAY:{
+			UART_putString(UART_0, "Wednesday \r");
+			break;
+		}
+		case THURSDAY:{
+			UART_putString(UART_0, "Thursday \r");
+			break;
+		}
+		case FRIDAY:{
+			UART_putString(UART_0, "Friday \r");
+			break;
+		}
+		case SATURDAY:{
+			UART_putString(UART_0, "Saturday \r");
+			break;
+		}
+	}
+	UART_putChar(UART_0, ',');
+	/*Print day*/
+	date[1] = date[1] + ADD;
+	UART_putChar(UART_0, date[1]);
+	date[2] = date[2] + ADD;
+	UART_putChar(UART_0, date[2]);
+	UART_putChar(UART_0, '/');
+	/*Print month*/
+	date[3] = date[3] + ADD;
+	UART_putChar(UART_0, date[3]);
+	date[4] = date[4] + ADD;
+	UART_putChar(UART_0, date[4]);
+	UART_putChar(UART_0, '/');
+	/*Print year*/
+	date[5] = date[5] + ADD;
+	UART_putChar(UART_0, date[5]);
+	date[6] = date[6] + ADD;
+	UART_putChar(UART_0, date[6]);
+
 }
