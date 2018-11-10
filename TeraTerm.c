@@ -7,6 +7,7 @@
 
 #include "TeraTerm.h"
 #include "Bits.h"
+#include "UART.h"
 #include "RTC.h"
 
 TERATERM_clock_t Clock;
@@ -44,4 +45,24 @@ void TERATERM_get_decode_calendar(TERATERM_calendar_t calendar_t){
 	 date[4] = (calendar_t.month & UNIT_MASK);
 	 date[5] = (calendar_t.year & DECIMAL_MASK)>>SHIFT_DECIMAL;
 	 date[6] = (calendar_t.year & UNIT_MASK);
+}
+
+void TERATERM_print_clock(){
+	/*Print hour*/
+	time[0] = time[0] + ADD;
+	UART_putChar(UART_0, time[0]);
+	time[1] = time[1] + ADD;
+	UART_putChar(UART_0, time[1]);
+	UART_putChar(UART_0, ':');
+	/*Print minutes*/
+	time[2] = time[2] + ADD;
+	UART_putChar(UART_0, time[2]);
+	time[3] = time[2] + ADD;
+	UART_putChar(UART_0, time[3]);
+	UART_putChar(UART_0, ':');
+	/*Print seconds*/
+	time[4] = time[2] + ADD;
+	UART_putChar(UART_0, time[4]);
+	time[5] = time[2] + ADD;
+	UART_putChar(UART_0, time[5]);
 }

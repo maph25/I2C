@@ -16,6 +16,8 @@
 #define DECIMAL_MASK 0xF0
 /*Unit mask*/
 #define UNIT_MASK	0x0F
+/*Addition for printing char*/
+#define ADD 0x30
 
 /*Structure to save current time*/
 typedef struct{
@@ -39,5 +41,9 @@ void TERATERM_get_calendar();
 /*Transform RTC information to chars for UART*/
 void TERATERM_get_decode_clock(TERATERM_clock_t clock_t);
 void TERATERM_get_decode_calendar(TERATERM_calendar_t calendar_t);
+
+/*Print in screen*/
+void TERATERM_print_clock();
+
 
 #endif /* TERATERM_H_ */
