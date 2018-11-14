@@ -11,15 +11,10 @@
 #include "Bits.h"
 #include "MK64F12.h"
 
-#define BAUD_EQ_CONSTANT 16
-#define BRFA_EQ_CONSTANT 32
+#define UART_MULT 16
+#define UART_MULT_2 32
+#define UART_SHIFT 8
 
-#define UART0_CLOCKGATING 0x400
-#define UART1_CLOCKGATING 0x800
-#define UART2_CLOCKGATING 0x1000
-#define UART3_CLOCKGATING 0x2000
-#define UART4_CLOCKGATING 0x400
-#define UART5_CLOCKGATING 0x800
 
 /**
  * \brief A mail box type definition for serial port
@@ -78,7 +73,7 @@ void UART_init(UART_ChannelType uartChannel, uint32 systemClk, UART_BaudRateType
  	 \param[in]  uartChannel indicates the UART channel.
  	 \return void
  */
-void UART_interruptEnable(UART_ChannelType uartChannel);
+void UART_interrupt_enable(UART_ChannelType uartChannel);
 
 /********************************************************************************************/
 /********************************************************************************************/
@@ -92,7 +87,7 @@ void UART_interruptEnable(UART_ChannelType uartChannel);
  	 \return void
  */
 
-void UART_putChar (UART_ChannelType uartChannel, uint8 character);
+void UART_put_char (UART_ChannelType uartChannel, uint8 character);
 /********************************************************************************************/
 /********************************************************************************************/
 /********************************************************************************************/
@@ -102,7 +97,7 @@ void UART_putChar (UART_ChannelType uartChannel, uint8 character);
  	 \param[in]  string pointer to the string to be transmitted.
  	 \return void
  */
-void UART_putString(UART_ChannelType uartChannel, sint8* string);
+void UART_put_string(UART_ChannelType uartChannel, sint8* string);
 
 
 #endif /* UART_H_ */
