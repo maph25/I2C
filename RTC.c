@@ -44,7 +44,7 @@ void RTC_set_seconds(uint8 second){
 	I2C_wait();
 	I2C_get_ack();
 	/*Data*/
-	I2C_write_byte(second); /*Oscillator enable, 59s*/
+	I2C_write_byte(second);
 	I2C_wait();
 	I2C_get_ack();
 	/*Stop*/
