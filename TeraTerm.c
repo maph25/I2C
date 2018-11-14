@@ -48,6 +48,8 @@ void TERATERM_get_decode_calendar(TERATERM_calendar_t calendar_t){
 }
 /*Print menu of options*/
 void TERATERM_print_menu(){
+	/*Text in white and background in blue */
+	UART_put_string(UART_0,"\033[0;37;44m");
 	UART_put_string(UART_0, "1.- Set Time \r");
 	UART_put_string(UART_0, "2.- Set Date \r");
 	UART_put_string(UART_0, "3.- Read Time \r");
