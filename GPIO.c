@@ -11,6 +11,13 @@
 #include "GPIO.h"
 #include "Bits.h"
 
+uint8 flagPortC = FALSE;
+
+void PORTC_IRQHandler()
+{
+	flagPortC = TRUE;
+	GPIO_clear_interrupt(GPIO_C);
+}
 
 void GPIO_clear_interrupt(gpio_port_name_t portName)
 {
