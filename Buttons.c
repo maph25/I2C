@@ -6,6 +6,8 @@
  */
 
 #include "GPIO.h"
+#include "Bits.h"
+#include "Buttons.h"
 #include "NVIC.h"
 
 void BUTTONS_init(){
@@ -35,5 +37,21 @@ void BUTTONS_init(){
 	NVIC_enableInterruptAndPriotity(PORTC_IRQ, PRIORITY_3);
 	/*Enables all interruptions*/
 	EnableInterrupts;
+}
 
+uint8 BUTTONS_decode(){
+	if(GPIO_read_pin(GPIO_C, BIT5) == FALSE)
+		return B0;
+	else if(GPIO_read_pin(GPIO_C, BIT7) == FALSE)
+		return B1;
+	else if(GPIO_read_pin(GPIO_C, BIT0) == FALSE)
+		return B2;
+	else if(GPIO_read_pin(GPIO_C, BIT9) == FALSE)
+		return B3;
+	else if(GPIO_read_pin(GPIO_C, BIT8) == FALSE)
+		return B4;
+	else if(GPIO_read_pin(GPIO_C, BIT3) == FALSE)
+		return B5;
+	else
+		return BUTTONS_NULL;
 }
