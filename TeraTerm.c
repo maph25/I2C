@@ -59,6 +59,8 @@ void TERATERM_print_menu(){
 }
 
 void TERATERM_print_clock(){
+	/*Text in black and background in white*/
+	UART_put_string(UART_0,"\033[0;30;47m");
 	UART_put_string(UART_0, "Current time is: \r");
 	/*Print hour*/
 	time[0] = time[0] + ADD;
@@ -80,6 +82,8 @@ void TERATERM_print_clock(){
 }
 
 void TERATERM_print_calendar(){
+	/*Text in black and background in white*/
+	UART_put_string(UART_0,"\033[0;30;47m");
 	UART_put_string(UART_0, "Today is: \r");
 	/*Print weekday*/
 	switch(date[0]){

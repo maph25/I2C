@@ -21,6 +21,7 @@ int main(void) {
 
 
     while(1) {
+    	TERATERM_print_menu();
 
 
     }
