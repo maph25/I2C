@@ -15,6 +15,7 @@
 #define B3 	 0x04
 #define B4 	 0x05
 #define B5 	 0x06
+#define B6	 0x07
 #define BUTTONS_NULL 0xFF
 
 /*Push buttons configuration*/
