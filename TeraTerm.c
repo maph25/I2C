@@ -6,9 +6,12 @@
  */
 
 #include "TeraTerm.h"
+#include "Delay.h"
+#include "EEPROM.h"
 #include "Bits.h"
 #include "UART.h"
 #include "RTC.h"
+#include "Buttons.h"
 
 TERATERM_clock_t Clock;
 TERATERM_calendar_t Calendar;
@@ -100,7 +103,7 @@ void TERATERM_print_calendar(){
 			break;
 		}
 		case WEDNESDAY:{
-			UART_putString(UART_0, "Wednesday \r");
+			UART_put_string(UART_0, "Wednesday \r");
 			break;
 		}
 		case THURSDAY:{
@@ -136,3 +139,66 @@ void TERATERM_print_calendar(){
 	UART_put_char(UART_0, date[6]);
 
 }
+
+void TERATERM_write_memory(){
+	/*Variable that will increase array size*/
+	uint8 size;
+	/*Value to scan the array size*/
+	uint8 scan;
+	/*Variable for message selection*/
+	uint8 messageSelect;
+	/*Variable for getting UART mailbox content*/
+	uint8 flag;
+	uint8 mailbox;
+	/*Address variable for writing*/
+	uint8 address;
+	/*Variable initialization*/
+	size = 0;
+	scan = 0;
+	messageSelect = BUTTONS_decode();
+	flag = UART_flag_return();
+	mailbox = UART_mailbox_return();
+	/*Array to save message*/
+	uint8 message[size];
+
+	while(flag == TRUE){
+		size++;
+		message[size] = mailbox;
+		if(mailbox == ENTER_MASK){
+			switch(messageSelect){
+			case MESSAGE_ONE:{
+				address = ADDRESS_MESSAGE_ONE;
+				for(; scan < 0; scan--){
+					EEPROM_write_data(address, message[scan]);
+					delay(WRITE_DELAY);
+					address++;
+					}/*For*/
+			}
+				break;
+			case MESSAGE_TWO:{
+				address = ADDRESS_MESSAGE_TWO;
+				for(; scan < 0; scan--){
+					EEPROM_write_data(address, message[scan]);
+					delay(WRITE_DELAY);
+					address++;
+					}/*For*/
+			}
+				break;
+			case MESSAGE_THREE:{
+				address = ADDRESS_MESSAGE_TWO;
+				for(; scan < 0; scan--){
+					EEPROM_write_data(address, message[scan]);
+					delay(WRITE_DELAY);
+					address++;
+					}/*For*/
+			}
+				break;
+			default:
+				break;
+			}/*Switch*/
+
+		}/*If*/
+	}
+}
+
+

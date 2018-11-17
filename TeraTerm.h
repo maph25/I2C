@@ -13,20 +13,31 @@
 /*Shifter for decimal*/
 #define SHIFT_DECIMAL (4u)
 /*Decimal mask*/
-#define DECIMAL_MASK 0xF0
+#define DECIMAL_MASK 	0xF0
 /*Unit mask*/
-#define UNIT_MASK	0x0F
+#define UNIT_MASK		0x0F
 /*Addition for printing char*/
-#define ADD 0x30
+#define ADD 			0x30
 /*Days of the week*/
-#define SUNDAY 0x01
-#define MONDAY 0x02
-#define TUESDAY 0x03
-#define WEDNESDAY 0x04
-#define THURSDAY 0x05
-#define FRIDAY 0x06
-#define SATURDAY 0x07
-
+#define SUNDAY 			0x01
+#define MONDAY 			0x02
+#define TUESDAY 		0x03
+#define WEDNESDAY 		0x04
+#define THURSDAY 		0x05
+#define FRIDAY 			0x06
+#define SATURDAY 		0x07
+/*Enter ASCII value*/
+#define ENTER_MASK 		0x0D
+/*Message address values*/
+#define ADDRESS_MESSAGE_ONE 	0x00
+#define ADDRESS_MESSAGE_TWO 	0x80
+#define ADDRESS_MESSAGE_THREE 	0xC0
+/*Message selection values*/
+#define MESSAGE_ONE 	0x02
+#define MESSAGE_TWO 	0x03
+#define MESSAGE_THREE	0x04
+/*Delay time for writing*/
+#define WRITE_DELAY (1000u)
 /*Structure to save current time*/
 typedef struct{
 	uint8 hours;
@@ -54,6 +65,7 @@ void TERATERM_get_decode_calendar(TERATERM_calendar_t calendar_t);
 void TERATERM_print_menu();
 void TERATERM_print_clock();
 void TERATERM_print_calendar();
+void TERATERM_print_memory();
 
 
 #endif /* TERATERM_H_ */
