@@ -61,6 +61,9 @@ void TERATERM_get_calendar();
 void TERATERM_get_decode_clock(TERATERM_clock_t clock_t);
 void TERATERM_get_decode_calendar(TERATERM_calendar_t calendar_t);
 
+/*Write in EEPROM reading with UART*/
+void TERATERM_write_memory();
+
 /*Print in screen*/
 void TERATERM_print_menu();
 void TERATERM_print_clock();

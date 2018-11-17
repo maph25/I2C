@@ -17,6 +17,8 @@ TERATERM_clock_t Clock;
 TERATERM_calendar_t Calendar;
 uint8 time[6];
 uint8 date[7];
+/*Variable that will increase array size*/
+uint8 size;
 
 void TERATERM_get_clock(){
 	Clock.hours = RTC_get_hours();
@@ -141,8 +143,6 @@ void TERATERM_print_calendar(){
 }
 
 void TERATERM_write_memory(){
-	/*Variable that will increase array size*/
-	uint8 size;
 	/*Value to scan the array size*/
 	uint8 scan;
 	/*Variable for message selection*/
@@ -199,6 +199,42 @@ void TERATERM_write_memory(){
 
 		}/*If*/
 	}
+}
+
+void TERATERM_print_memory(){
+	uint8 scan = 0;
+	uint8 address;
+	sint8 message[size];
+	uint8 messageSelect;
+	messageSelect = BUTTONS_decode();
+	switch(messageSelect){
+	case MESSAGE_ONE:{
+		address = ADDRESS_MESSAGE_ONE;
+		for(scan = 0; scan == size; scan++){
+			message[scan] = EEPROM_read_data(address);
+			UART_put_char(UART_0, message[scan]);
+		}/*For*/
+	}
+		break;
+	case MESSAGE_TWO:{
+		address = ADDRESS_MESSAGE_TWO;
+		for(scan = 0; scan == size; scan++){
+			message[scan] = EEPROM_read_data(address);
+			UART_put_char(UART_0, message[scan]);
+		}/*For*/
+	}
+		break;
+	case MESSAGE_THREE:{
+		address = ADDRESS_MESSAGE_TWO;
+		for(scan = 0; scan == size; scan++){
+			message[scan] = EEPROM_read_data(address);
+			UART_put_char(UART_0, message[scan]);
+		}/*For*/
+	}
+		break;
+	default:
+		break;
+	}/*Switch*/
 }
 
 
