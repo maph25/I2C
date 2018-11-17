@@ -20,11 +20,22 @@ UART_MailBoxType UART0_MailBox; /** Structure to receive the data from the UART*
  */
 void UART0_RX_TX_IRQHandler(void)
 {
-
 	while(!(UART0->S1 & UART_S1_RDRF_MASK));
 	UART0_MailBox.flag = TRUE;
 	UART0_MailBox.mailBox = UART0->D;
 
+}
+
+uint8 UART_mailbox_return(){
+	uint8 getMail;
+	getMail = UART0_MailBox.mailBox;
+	return getMail;
+}
+
+uint8 UART_flag_return(){
+	uint8 getFlag;
+	getFlag = UART0_MailBox.flag;
+	return getFlag;
 }
 
 

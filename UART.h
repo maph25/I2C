@@ -40,6 +40,11 @@ typedef struct{
 	UART_BaudRateType baudRate;
 }UART_Config;
 
+
+/*Gets values from the mailbox, used for reading from TeraTerm and writing in memory*/
+uint8 UART_mailbox_return();
+uint8 UART_flag_return();
+
 /********************************************************************************************/
 /********************************************************************************************/
 /********************************************************************************************/
