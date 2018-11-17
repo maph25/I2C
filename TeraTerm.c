@@ -53,19 +53,26 @@ void TERATERM_get_decode_calendar(TERATERM_calendar_t calendar_t){
 }
 /*Print menu of options*/
 void TERATERM_print_menu(){
-	/*Text in white and background in blue */
-	UART_put_string(UART_0,"\033[0;37;44m");
+	UART_put_string(UART_0,"\033[2J"); /*Clear screen*/
+	UART_put_string(UART_0,"\033[0;37;44m"); /*Text in white and background in blue */
+	UART_put_string(UART_0,"\033[8;10H"); /*X and Y position*/
 	UART_put_string(UART_0, "1.- Set Time \r");
+	UART_put_string(UART_0,"\033[9;10H"); /*X and Y position*/
 	UART_put_string(UART_0, "2.- Set Date \r");
+	UART_put_string(UART_0,"\033[10;10H"); /*X and Y position*/
 	UART_put_string(UART_0, "3.- Read Time \r");
+	UART_put_string(UART_0,"\033[11;10H"); /*X and Y position*/
 	UART_put_string(UART_0, "4.- Read Date \r");
+	UART_put_string(UART_0,"\033[12;10H"); /*X and Y position*/
 	UART_put_string(UART_0, "5.- Write in memory \r");
+	UART_put_string(UART_0,"\033[13;10H"); /*X and Y position*/
 	UART_put_string(UART_0, "6.- Read from memory \r");
 }
 
 void TERATERM_print_clock(){
-	/*Text in black and background in white*/
-	UART_put_string(UART_0,"\033[0;30;47m");
+	UART_put_string(UART_0,"\033[2J"); /*Clear screen*/
+	UART_put_string(UART_0,"\033[0;30;47m");/*Text in black and background in white*/
+	UART_put_string(UART_0,"\033[8;10H"); /*X and Y position*/
 	UART_put_string(UART_0, "Current time is: \r");
 	/*Print hour*/
 	time[0] = time[0] + ADD;
@@ -87,36 +94,44 @@ void TERATERM_print_clock(){
 }
 
 void TERATERM_print_calendar(){
-	/*Text in black and background in white*/
-	UART_put_string(UART_0,"\033[0;30;47m");
+	UART_put_string(UART_0,"\033[2J"); /*Clear screen*/
+	UART_put_string(UART_0,"\033[0;30;47m"); /*Text in black and background in white*/
+	UART_put_string(UART_0,"\033[8;10H"); /*X and Y position*/
 	UART_put_string(UART_0, "Today is: \r");
 	/*Print weekday*/
 	switch(date[0]){
 		case SUNDAY:{
+			UART_put_string(UART_0,"\033[9;15H"); /*X and Y position*/
 			UART_put_string(UART_0, "Sunday \r");
 			break;
 		}
 		case MONDAY:{
+			UART_put_string(UART_0,"\033[9;15H"); /*X and Y position*/
 			UART_put_string(UART_0, "Monday \r");
 			break;
 		}
 		case TUESDAY:{
+			UART_put_string(UART_0,"\033[9;15H"); /*X and Y position*/
 			UART_put_string(UART_0, "Tuesday \r");
 			break;
 		}
 		case WEDNESDAY:{
+			UART_put_string(UART_0,"\033[9;15H"); /*X and Y position*/
 			UART_put_string(UART_0, "Wednesday \r");
 			break;
 		}
 		case THURSDAY:{
+			UART_put_string(UART_0,"\033[9;15H"); /*X and Y position*/
 			UART_put_string(UART_0, "Thursday \r");
 			break;
 		}
 		case FRIDAY:{
+			UART_put_string(UART_0,"\033[9;15H"); /*X and Y position*/
 			UART_put_string(UART_0, "Friday \r");
 			break;
 		}
 		case SATURDAY:{
+			UART_put_string(UART_0,"\033[9;15H"); /*X and Y position*/
 			UART_put_string(UART_0, "Saturday \r");
 			break;
 		}
@@ -142,7 +157,16 @@ void TERATERM_print_calendar(){
 
 }
 
+
 void TERATERM_write_memory(){
+	UART_put_string(UART_0,"\033[2J"); /*Clear screen*/
+	UART_put_string(UART_0,"\033[0;30;47m");/*Text in black and background in white*/
+	UART_put_string(UART_0,"\033[10;10H"); /*X and Y position*/
+	UART_put_string(UART_0, "1.-Write message one \r");
+	UART_put_string(UART_0,"\033[11;10H"); /*X and Y position*/
+	UART_put_string(UART_0, "2.- Write message two \r");
+	UART_put_string(UART_0,"\033[12;10H"); /*X and Y position*/
+	UART_put_string(UART_0, "5.- Write message three \r");
 	/*Value to scan the array size*/
 	uint8 scan;
 	/*Variable for message selection*/
@@ -167,6 +191,10 @@ void TERATERM_write_memory(){
 		if(mailbox == ENTER_MASK){
 			switch(messageSelect){
 			case MESSAGE_ONE:{
+				UART_put_string(UART_0,"\033[2J"); /*Clear screen*/
+				UART_put_string(UART_0,"\033[0;30;47m");/*Text in black and background in white*/
+				UART_put_string(UART_0,"\033[9;15H"); /*X and Y position*/
+				UART_put_string(UART_0,"Type your message\r"); /*X and Y position*/
 				address = ADDRESS_MESSAGE_ONE;
 				for(; scan < 0; scan--){
 					EEPROM_write_data(address, message[scan]);
@@ -176,6 +204,10 @@ void TERATERM_write_memory(){
 			}
 				break;
 			case MESSAGE_TWO:{
+				UART_put_string(UART_0,"\033[2J"); /*Clear screen*/
+				UART_put_string(UART_0,"\033[0;30;47m");/*Text in black and background in white*/
+				UART_put_string(UART_0,"\033[9;15H"); /*X and Y position*/
+				UART_put_string(UART_0,"Type your message\r"); /*X and Y position*/
 				address = ADDRESS_MESSAGE_TWO;
 				for(; scan < 0; scan--){
 					EEPROM_write_data(address, message[scan]);
@@ -185,6 +217,10 @@ void TERATERM_write_memory(){
 			}
 				break;
 			case MESSAGE_THREE:{
+				UART_put_string(UART_0,"\033[2J"); /*Clear screen*/
+				UART_put_string(UART_0,"\033[0;30;47m");/*Text in black and background in white*/
+				UART_put_string(UART_0,"\033[9;15H"); /*X and Y position*/
+				UART_put_string(UART_0,"Type your message\r"); /*X and Y position*/
 				address = ADDRESS_MESSAGE_TWO;
 				for(; scan < 0; scan--){
 					EEPROM_write_data(address, message[scan]);
@@ -206,6 +242,10 @@ void TERATERM_print_memory(){
 	uint8 address;
 	sint8 message[size];
 	uint8 messageSelect;
+	UART_put_string(UART_0,"\033[2J"); /*Clear screen*/
+	UART_put_string(UART_0,"\033[0;30;47m");/*Text in black and background in white*/
+	UART_put_string(UART_0,"\033[9;15H"); /*X and Y position*/
+	UART_put_string(UART_0,"Which message do you want to show\r"); /*X and Y position*/
 	messageSelect = BUTTONS_decode();
 	switch(messageSelect){
 	case MESSAGE_ONE:{
