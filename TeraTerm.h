@@ -38,6 +38,13 @@
 #define MESSAGE_THREE	0x04
 /*Delay time for writing*/
 #define WRITE_DELAY (1000u)
+/*Bit for RTC oscilloscope enabler*/
+#define ST_MASK	    0x80
+/*Value to substract to get actual number*/
+#define HEX_MASK	0x30
+/*Decimal Shifter*/
+#define DECIMAL_SHIFTER (4u)
+
 /*Structure to save current time*/
 typedef struct{
 	uint8 hours;
@@ -61,8 +68,9 @@ void TERATERM_get_calendar();
 void TERATERM_get_decode_clock(TERATERM_clock_t clock_t);
 void TERATERM_get_decode_calendar(TERATERM_calendar_t calendar_t);
 
-/*Write in EEPROM reading with UART*/
+/*Write reading with UART*/
 void TERATERM_write_memory();
+void TERATERM_write_clock();
 
 /*Print in screen*/
 void TERATERM_print_menu();

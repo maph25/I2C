@@ -157,6 +157,51 @@ void TERATERM_print_calendar(){
 
 }
 
+void TERATERM_write_clock(){
+	uint8 flag;
+	uint8 mailbox;
+	uint8 scan;
+	uint8 hours;
+	uint8 minutes;
+	uint8 seconds;
+	uint8 secondsDecimals;
+	uint8 secondsUnits;
+	uint8 minutesDecimals;
+	uint8 minutesUnits;
+	uint8 hoursDecimals;
+	uint8 hoursUnits;
+	UART_put_string(UART_0,"\033[2J"); /*Clear screen*/
+	UART_put_string(UART_0,"\033[0;30;47m");/*Text in black and background in white*/
+	UART_put_string(UART_0,"\033[9;15H"); /*X and Y position*/
+	UART_put_string(UART_0, "Type in the time in the format hhmmss \r");
+	flag = UART_flag_return();
+	mailbox = UART_mailbox_return();
+	while(flag == TRUE){
+		for(scan = 0; scan == 6; scan++){
+			time[scan] = mailbox;
+		}
+	}
+		if(mailbox == ENTER_MASK){
+		/*Set seconds*/
+		time[4] = time[4] - HEX_MASK;
+		secondsDecimals = time[4] << DECIMAL_SHIFTER;
+		secondsUnits = time[5] - HEX_MASK;
+		seconds = (ST_MASK | secondsDecimals | secondsUnits);
+		RTC_set_seconds(seconds);
+		/*Set minutes*/
+		time[2] = time[2] - HEX_MASK;
+		minutesDecimals = time[2] << DECIMAL_SHIFTER;
+		minutesUnits = time[3] - HEX_MASK;
+		minutes = (minutesDecimals | minutesUnits);
+		RTC_set_minutes(minutes);
+		/*Set hours*/
+		time[2] = time[2] - HEX_MASK;
+		hoursDecimals = time[2] << DECIMAL_SHIFTER;
+		hoursUnits = time[3] - HEX_MASK;
+		hours = (hoursDecimals | hoursUnits);
+		RTC_set_hours(hours);
+	}
+}
 
 void TERATERM_write_memory(){
 	UART_put_string(UART_0,"\033[2J"); /*Clear screen*/
