@@ -25,24 +25,38 @@ int main(void) {
     	switch(button_selection){
     	/*Return to menu, clear screen*/
     	case B0:
+    		UART_put_string(UART_0,"\033[2J"); /*Clear screen*/
+    		TERATERM_print_menu();
     		break;
     	/*Set Time*/
     	case B1:
+    		UART_put_string(UART_0,"\033[2J"); /*Clear screen*/
+    		TERATERM_write_clock();
     		break;
     	/*Set Date*/
     	case B2:
+    		UART_put_string(UART_0,"\033[2J"); /*Clear screen*/
+    		TERATERM_write_date();
     	   break;
     	/*Print Time*/
     	case B3:
+    		UART_put_string(UART_0,"\033[2J"); /*Clear screen*/
+    		TERATERM_print_clock();
     	   break;
-    	 /*Print Date*/
+    	/*Print Date*/
     	case B4:
+    		UART_put_string(UART_0,"\033[2J"); /*Clear screen*/
+    		TERATERM_print_calendar();
     	   break;
     	/*Write in memory*/
     	case B5:
+    		UART_put_string(UART_0,"\033[2J"); /*Clear screen*/
+    		TERATERM_write_memory();
     	   break;
     	/*Print message from memory*/
     	case B6:
+    		UART_put_string(UART_0,"\033[2J"); /*Clear screen*/
+    		TERATERM_print_memory();
     	   break;
     	default:
     		break;

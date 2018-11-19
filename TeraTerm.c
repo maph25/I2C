@@ -173,7 +173,9 @@ void TERATERM_write_date(){
 	UART_put_string(UART_0,"\033[2J"); /*Clear screen*/
 	UART_put_string(UART_0,"\033[0;30;47m");/*Text in black and background in white*/
 	UART_put_string(UART_0,"\033[9;15H"); /*X and Y position*/
-	UART_put_string(UART_0, "Type in the date in the format weekday(0 for sunday, 6 for saturday)dddmmyy \r");
+	UART_put_string(UART_0, "Type in the date in the format weekday(0 for sunday, 6 for saturday)dddmmyy, then press enter\r");
+	UART_put_string(UART_0,"\033[12;10H"); /*X and Y position*/
+	UART_put_string(UART_0, "Press B0 to go back to the menu\r");
 	flag = UART_flag_return();
 	mailbox = UART_mailbox_return();
 	while(flag == TRUE){
@@ -222,7 +224,10 @@ void TERATERM_write_clock(){
 	UART_put_string(UART_0,"\033[2J"); /*Clear screen*/
 	UART_put_string(UART_0,"\033[0;30;47m");/*Text in black and background in white*/
 	UART_put_string(UART_0,"\033[9;15H"); /*X and Y position*/
-	UART_put_string(UART_0, "Type in the time in the format hhmmss \r");
+	UART_put_string(UART_0, "Type in the time in the format hhmmss, then press enter\r");
+	UART_put_string(UART_0,"\033[12;10H"); /*X and Y position*/
+	UART_put_string(UART_0, "Press B0 to go back to the menu\r");
+
 	flag = UART_flag_return();
 	mailbox = UART_mailbox_return();
 	while(flag == TRUE){
@@ -278,7 +283,6 @@ void TERATERM_write_memory(){
 	mailbox = UART_mailbox_return();
 	/*Array to save message*/
 	uint8 message[size];
-
 	while(flag == TRUE){
 		size++;
 		message[size] = mailbox;
@@ -288,7 +292,7 @@ void TERATERM_write_memory(){
 				UART_put_string(UART_0,"\033[2J"); /*Clear screen*/
 				UART_put_string(UART_0,"\033[0;30;47m");/*Text in black and background in white*/
 				UART_put_string(UART_0,"\033[9;15H"); /*X and Y position*/
-				UART_put_string(UART_0,"Type your message\r"); /*X and Y position*/
+				UART_put_string(UART_0,"Type your message\r");
 				address = ADDRESS_MESSAGE_ONE;
 				for(; scan < 0; scan--){
 					EEPROM_write_data(address, message[scan]);
@@ -301,7 +305,7 @@ void TERATERM_write_memory(){
 				UART_put_string(UART_0,"\033[2J"); /*Clear screen*/
 				UART_put_string(UART_0,"\033[0;30;47m");/*Text in black and background in white*/
 				UART_put_string(UART_0,"\033[9;15H"); /*X and Y position*/
-				UART_put_string(UART_0,"Type your message\r"); /*X and Y position*/
+				UART_put_string(UART_0,"Type your message\r");
 				address = ADDRESS_MESSAGE_TWO;
 				for(; scan < 0; scan--){
 					EEPROM_write_data(address, message[scan]);
@@ -314,7 +318,7 @@ void TERATERM_write_memory(){
 				UART_put_string(UART_0,"\033[2J"); /*Clear screen*/
 				UART_put_string(UART_0,"\033[0;30;47m");/*Text in black and background in white*/
 				UART_put_string(UART_0,"\033[9;15H"); /*X and Y position*/
-				UART_put_string(UART_0,"Type your message\r"); /*X and Y position*/
+				UART_put_string(UART_0,"Type your message\r");
 				address = ADDRESS_MESSAGE_TWO;
 				for(; scan < 0; scan--){
 					EEPROM_write_data(address, message[scan]);
@@ -326,7 +330,6 @@ void TERATERM_write_memory(){
 			default:
 				break;
 			}/*Switch*/
-
 		}/*If*/
 	}
 }
@@ -339,10 +342,14 @@ void TERATERM_print_memory(){
 	UART_put_string(UART_0,"\033[2J"); /*Clear screen*/
 	UART_put_string(UART_0,"\033[0;30;47m");/*Text in black and background in white*/
 	UART_put_string(UART_0,"\033[9;15H"); /*X and Y position*/
-	UART_put_string(UART_0,"Which message do you want to show\r"); /*X and Y position*/
+	UART_put_string(UART_0,"Which message do you want to show\r");
 	messageSelect = BUTTONS_decode();
 	switch(messageSelect){
 	case MESSAGE_ONE:{
+		UART_put_string(UART_0,"\033[2J"); /*Clear screen*/
+		UART_put_string(UART_0,"\033[0;30;47m");/*Text in black and background in white*/
+		UART_put_string(UART_0,"\033[9;15H"); /*X and Y position*/
+		UART_put_string(UART_0,"The message is:\r");
 		address = ADDRESS_MESSAGE_ONE;
 		for(scan = 0; scan == size; scan++){
 			message[scan] = EEPROM_read_data(address);
@@ -351,6 +358,10 @@ void TERATERM_print_memory(){
 	}
 		break;
 	case MESSAGE_TWO:{
+		UART_put_string(UART_0,"\033[2J"); /*Clear screen*/
+		UART_put_string(UART_0,"\033[0;30;47m");/*Text in black and background in white*/
+		UART_put_string(UART_0,"\033[9;15H"); /*X and Y position*/
+		UART_put_string(UART_0,"The message is:\r");
 		address = ADDRESS_MESSAGE_TWO;
 		for(scan = 0; scan == size; scan++){
 			message[scan] = EEPROM_read_data(address);
@@ -359,6 +370,10 @@ void TERATERM_print_memory(){
 	}
 		break;
 	case MESSAGE_THREE:{
+		UART_put_string(UART_0,"\033[2J"); /*Clear screen*/
+		UART_put_string(UART_0,"\033[0;30;47m");/*Text in black and background in white*/
+		UART_put_string(UART_0,"\033[9;15H"); /*X and Y position*/
+		UART_put_string(UART_0,"The message is:\r");
 		address = ADDRESS_MESSAGE_TWO;
 		for(scan = 0; scan == size; scan++){
 			message[scan] = EEPROM_read_data(address);
