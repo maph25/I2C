@@ -71,6 +71,7 @@ void TERATERM_get_decode_calendar(TERATERM_calendar_t calendar_t);
 /*Write reading with UART*/
 void TERATERM_write_memory();
 void TERATERM_write_clock();
+void TERATERM_write_date();
 
 /*Print in screen*/
 void TERATERM_print_menu();

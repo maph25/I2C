@@ -156,6 +156,55 @@ void TERATERM_print_calendar(){
 	UART_put_char(UART_0, date[6]);
 
 }
+void TERATERM_write_date(){
+	uint8 flag;
+	uint8 mailbox;
+	uint8 scan;
+	uint8 weekday;
+	uint8 day;
+	uint8 month;
+	uint8 year;
+	uint8 dayDecimal;
+	uint8 dayUnit;
+	uint8 monthDecimal;
+	uint8 monthUnit;
+	uint8 yearDecimal;
+	uint8 yearUnit;
+	UART_put_string(UART_0,"\033[2J"); /*Clear screen*/
+	UART_put_string(UART_0,"\033[0;30;47m");/*Text in black and background in white*/
+	UART_put_string(UART_0,"\033[9;15H"); /*X and Y position*/
+	UART_put_string(UART_0, "Type in the date in the format weekday(0 for sunday, 6 for saturday)dddmmyy \r");
+	flag = UART_flag_return();
+	mailbox = UART_mailbox_return();
+	while(flag == TRUE){
+		for(scan = 0; scan == 6; scan++){
+			date[scan] = mailbox;
+		}
+		if(mailbox == ENTER_MASK){
+			/*Set weekday*/
+			weekday = date[0] - HEX_MASK;
+			RTC_set_weekday(weekday);
+			/*Set day*/
+			date[1] = date[1] - HEX_MASK;
+			dayDecimal = date[1] << DECIMAL_SHIFTER;
+			dayUnit = date[2] - HEX_MASK;
+			day = (dayDecimal | dayUnit);
+			RTC_set_day(day);
+			/*Set month*/
+			date[3] = date[3] - HEX_MASK;
+			monthDecimal = date[3] << DECIMAL_SHIFTER;
+			monthUnit = date[4] - HEX_MASK;
+			month = (monthDecimal | monthUnit);
+			RTC_set_month(month);
+			/*Set year*/
+			date[5] = date[5] - HEX_MASK;
+			yearDecimal = date[5] << DECIMAL_SHIFTER;
+			yearUnit = date[6] - HEX_MASK;
+			year = (yearDecimal | yearUnit);
+			RTC_set_year(year);
+		}
+	}
+}
 
 void TERATERM_write_clock(){
 	uint8 flag;
@@ -177,10 +226,9 @@ void TERATERM_write_clock(){
 	flag = UART_flag_return();
 	mailbox = UART_mailbox_return();
 	while(flag == TRUE){
-		for(scan = 0; scan == 6; scan++){
+		for(scan = 0; scan == 5; scan++){
 			time[scan] = mailbox;
 		}
-	}
 		if(mailbox == ENTER_MASK){
 		/*Set seconds*/
 		time[4] = time[4] - HEX_MASK;
@@ -195,11 +243,12 @@ void TERATERM_write_clock(){
 		minutes = (minutesDecimals | minutesUnits);
 		RTC_set_minutes(minutes);
 		/*Set hours*/
-		time[2] = time[2] - HEX_MASK;
-		hoursDecimals = time[2] << DECIMAL_SHIFTER;
-		hoursUnits = time[3] - HEX_MASK;
+		time[0] = time[0] - HEX_MASK;
+		hoursDecimals = time[0] << DECIMAL_SHIFTER;
+		hoursUnits = time[1] - HEX_MASK;
 		hours = (hoursDecimals | hoursUnits);
 		RTC_set_hours(hours);
+		}
 	}
 }
 
