@@ -41,6 +41,10 @@ uint8 UART_flag_return(){
 
 void UART_init(UART_ChannelType uartChannel, uint32 system_clock, UART_BaudRateType baudRate)
 {
+	gpio_pin_control_register_t config = GPIO_MUX3;
+	GPIO_clock_gating(GPIO_B);
+	GPIO_pin_control_register(GPIO_B, BIT16, &config);
+	GPIO_pin_control_register(GPIO_B, BIT17, &config);
 	uint16 baud_rate;
 	uint8 temp;
 	baud_rate = system_clock/(baudRate*UART_MULT);
